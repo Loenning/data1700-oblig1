@@ -4,7 +4,7 @@ OsloMet brukernavn: thlon2720
 
 GitHub brukernavn: Loenning
 
-Github repo URL: https://github.com/data1700-v23/oblig-1-Loenning
+Github repo URL: https://github.com/Loenning/data1700-oblig1
 
 Fullt navn: Thomas Stavik Lønning
 

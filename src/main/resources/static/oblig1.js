@@ -1,85 +1,83 @@
-// Setting up an empty array
+//------Creating an empty array for ticket orders
 const tickets = []
 
+//------function for buying tickets
 function buyTicket() {
-    let film = document.getElementById("film").value;
-    let antall = document.getElementById("antall").value;
-    let fornavn = document.getElementById("fornavn").value;
-    let etternavn = document.getElementById("etternavn").value;
-    let telefonnr = document.getElementById("telefonnr").value;
-    let epost = document.getElementById("epost").value;
+    const film = document.getElementById("film");
+    const antall = document.getElementById("antall");
+    const fornavn = document.getElementById("fornavn");
+    const etternavn = document.getElementById("etternavn");
+    const telefonnr = document.getElementById("telefonnr");
+    const epost = document.getElementById("epost");
+    const wrongAmount = document.getElementById("wrongAmount");
+    const wrongFirstName = document.getElementById("wrongFirstName");
+    const wrongLastName = document.getElementById("wrongLastName");
+    const wrongNumber = document.getElementById("wrongNumber");
+    const wrongEmail = document.getElementById("wrongEmail");
 
     let wrongInput = false;
 
-    if (antall <= 0) {
-        document.getElementById("wrongAmount").innerText = "Skriv inn antall";
-        wrongInput = true;
-    } else {
-        document.getElementById("wrongAmount").value = "";
-    }
+//------ if-statements that validate the user input using regex,
+//------ Using the wrongInput variable to hinder an order with invalid inputs from being put into the tickets array
 
-    if (fornavn === "") {
-        document.getElementById("wrongFirstName").innerText = "Skriv inn fornavn";
+    if (!/^[1-99]+$/.test(antall.value)) {
+        wrongAmount.innerText = "Velg antall billetter";
         wrongInput = true;
-    } else {
-        document.getElementById("wrongFirstName").value = "";
     }
-    if (etternavn === "") {
-        document.getElementById("wrongLastName").innerText = "Skriv inn etternavn";
+    if (!/^[a-åA-Å]+$/.test(fornavn.value)) {
+        wrongFirstName.innerText = "Skriv inn fornavn";
         wrongInput = true;
-    } else {
-        document.getElementById("wrongLastName").value = "";
     }
-    if (telefonnr === "") {
-        document.getElementById("wrongNumber").innerText = "Skriv inn telefonnr";
+    if (!/^[a-åA-Å]+$/.test(etternavn.value)) {
+        wrongLastName.innerText = "Skriv inn etternavn";
         wrongInput = true;
-    } else {
-        document.getElementById("wrongNumber").value = "";
     }
-    if (epost === "") {
-        document.getElementById("wrongEmail").innerText = "Skriv inn epost";
+    if (!/^\d{8}$/.test(telefonnr.value)) {
+        wrongNumber.innerText = "Skriv inn ett gyldig telefonnummer (8 tall)";
         wrongInput = true;
-    } else {
-        document.getElementById("wrongEmail").value = "";
+    }
+    if (!/^[a-åA-Å0-9._%+-]+@[a-åA-Å0-9.-]+\.[a-åA-Å]+$/.test(epost.value)) {
+        wrongEmail.innerText = "Skriv inn epost";
+        wrongInput = true;
     }
 
     if (wrongInput === false) {
         const order = {
-            film: film,
-            antall: antall,
-            fornavn: fornavn,
-            etternavn: etternavn,
-            telefonnr: telefonnr,
-            epost: epost
+            film: film.value,
+            antall: antall.value,
+            fornavn: fornavn.value,
+            etternavn: etternavn.value,
+            telefonnr: telefonnr.value,
+            epost: epost.value
         };
-
+//------ Puts the created order into the tickets array
         tickets.push(order);
+//------ Resetting the variable values once the order is pushed
+        film.value = "";
+        antall.value = "";
+        antall.innerText = "";
+        fornavn.value = "";
+        fornavn.innerText = "";
+        etternavn.value = "";
+        etternavn.innerText = "";
+        telefonnr.value = "";
+        telefonnr.innerText = "";
+        epost.value = "";
+        epost.innerText = "";
 
-        document.getElementById("film").value = "";
-        document.getElementById("antall").value = "";
-        document.getElementById("antall").innerText = "";
-        document.getElementById("fornavn").value = "";
-        document.getElementById("fornavn").innerText = "";
-        document.getElementById("etternavn").value = "";
-        document.getElementById("etternavn").innerText = "";
-        document.getElementById("telefonnr").value = "";
-        document.getElementById("telefonnr").innerText = "";
-        document.getElementById("epost").value = "";
-        document.getElementById("epost").innerText = "";
-
-        document.getElementById("wrongAmount").value = "";
-        document.getElementById("wrongAmount").innerText = "";
-        document.getElementById("wrongFirstName").value = "";
-        document.getElementById("wrongFirstName").innerText = "";
-        document.getElementById("wrongLastName").value = "";
-        document.getElementById("wrongLastName").innerText = "";
-        document.getElementById("wrongNumber").value = "";
-        document.getElementById("wrongNumber").innerText = "";
-        document.getElementById("wrongEmail").value = "";
-        document.getElementById("wrongEmail").innerText = "";
+        wrongAmount.value = "";
+        wrongAmount.innerText = "";
+        wrongFirstName.value = "";
+        wrongFirstName.innerText = "";
+        wrongLastName.value = "";
+        wrongLastName.innerText = "";
+        wrongNumber.value = "";
+        wrongNumber.innerText = "";
+        wrongEmail.value = "";
+        wrongEmail.innerText = "";
     }
 
-// En funksjon som viser bestillingen som ble gjort
+//------ Function for printing out the tickets array
     function showOrder() {
 
         let ut = "<table id='table'><tr>" +
@@ -98,7 +96,7 @@ function buyTicket() {
     showOrder();
 }
 
-// Funksjon som sletter alle billetter (tømmer arrayet)
+//------ Function that empties the array when the button is pressed
 function deleteAll() {
     tickets.length = 0;
     document.getElementById("list").innerHTML = "";
