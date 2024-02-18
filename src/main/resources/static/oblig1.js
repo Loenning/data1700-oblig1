@@ -21,19 +21,23 @@ function buyTicket() {
 //------ Function to validate the user input and gives different messages depending on if the input is missing
 //------ or not matching the given regex parameter
     function validateInput(value, regex, errorElement, errorEmpty, errorRegex) {
+        // If the value is validated, gives no error message
         if (regex.test(value)) {
             errorElement.innerText = "";
             return;
         }
+        // ELse the wrongInput variable changes to true
         wrongInput = true;
+        // Checks to see if the input field is empty or not and shows the correlated error message
         if (!value) {
             errorElement.innerText = errorEmpty;
             return;
         }
+        // Else the regex error message is shown
         errorElement.innerText = errorRegex;
     }
 
-//------ Validating input for each of the boxes, using parameters for each of the variables
+//------ Validating input value from each of the input fields, using the validateInput function
     validateInput(film.value, /^[^]+$/, wrongFilm, "Velg film", "Velg film")
     validateInput(antall.value, /^[1-99]+$/, wrongAmount, "Skriv inn antall", "Skriv inn gyldig antall")
     validateInput(fornavn.value, /^[a-zæøåA-ÅÆØÅ]+$/, wrongFirstName, "Skriv inn fornavn", "Skriv inn gyldig fornavn")
